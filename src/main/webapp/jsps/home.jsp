@@ -44,7 +44,6 @@
 </style>
 </head>
 <body>
-
 <header>
     <h1>Welcome to KK DEVOPS AWS Portal</h1>
     <h3>Training | Development | Consulting</h3>
