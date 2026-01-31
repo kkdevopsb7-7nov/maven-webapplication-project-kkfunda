@@ -1,5 +1,47 @@
-//scripted-way-pipeline
+//scripted-way-pipeline without slack notification
 /*node
+{
+    // /var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/maven-3.9.6
+    def mavenHome=tool name: "maven-3.9.6"
+    stage('git checkout')
+    {
+        git branch: 'dev', url: 'https://github.com/kkdevopsb7-7nov/maven-webapplication-project-kkfunda.git'
+    }
+    stage('maven compile')
+    {
+        //sh "mvn compile"
+        sh "${mavenHome}/bin/mvn compile"
+    }
+    stage('Build')
+    {
+        sh "${mavenHome}/bin/mvn clean package"
+    }
+    stage('SQ Report')
+    {
+        sh "${mavenHome}/bin/mvn sonar:sonar"
+    }
+    stage('Deploy into Nexus')
+    {
+        sh "${mavenHome}/bin/mvn clean deploy"
+    }
+    stage('Deploy to Tomcat') 
+    {
+      
+      sh """
+
+      curl -u noor:noor \
+--upload-file /var/lib/jenkins/workspace/scripted-way-PL-1/target/maven-web-application.war \
+"http://13.233.164.36:8080/manager/text/deploy?path=/maven-web-application&update=true"
+         
+        """
+    }
+} //node ending
+*/
+
+
+
+//scripted-way-pipeline with slack notification
+node
 {
     // /var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/maven-3.9.6
     def mavenHome=tool name: "maven-3.9.6"
@@ -38,7 +80,7 @@
 
       curl -u noor:noor \
 --upload-file /var/lib/jenkins/workspace/scripted-way-PL-1/target/maven-web-application.war \
-"http://13.127.216.234:8080/manager/text/deploy?path=/maven-web-application&update=true"
+"http://13.233.164.36:8080/manager/text/deploy?path=/maven-web-application&update=true"
          
         """
     }
@@ -90,11 +132,11 @@ def notifyBuild(String buildStatus = 'STARTED') {
 
 
 //jenkins 09-Dec 2025 
-*/
+
 
 //10-Dec-2025>>>>>Declarative-Way-Pipeline
 
-pipeline
+/*pipeline
 {
 	
    agent any
@@ -202,7 +244,7 @@ def notifyBuild(String buildStatus = 'STARTED') {
     }
 
     slackSend(color: colorCode, message: summary)
-}
+} */
 
 
 
