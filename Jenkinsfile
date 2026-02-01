@@ -41,7 +41,7 @@
 
 
 //scripted-way-pipeline with slack notification
-node
+/* node
 {
     // /var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/maven-3.9.6
     def mavenHome=tool name: "maven-3.9.6"
@@ -129,7 +129,7 @@ def notifyBuild(String buildStatus = 'STARTED') {
   slackSend (color: colorCode, message: summary, channel: '#jio-dev')
   
 }
-
+*/
 // >>>>>Declarative-Way-Pipeline without slack notification 
 
 /*pipeline
@@ -207,7 +207,7 @@ def notifyBuild(String buildStatus = 'STARTED') {
 
 //10-Dec-2025>>>>>Declarative-Way-Pipeline with slack notification
 
-/*pipeline
+pipeline
 {
 	
    agent any
@@ -261,7 +261,7 @@ def notifyBuild(String buildStatus = 'STARTED') {
 
       curl -u noor:noor \
 --upload-file /var/lib/jenkins/workspace/jio-Declarative-PL-dev/target/maven-web-application.war \
-"http://13.127.216.234:8080/manager/text/deploy?path=/maven-web-application&update=true"
+"http://13.232.14.231:8080/manager/text/deploy?path=/maven-web-application&update=true"
           
         """
               }
@@ -315,7 +315,7 @@ def notifyBuild(String buildStatus = 'STARTED') {
     }
 
     slackSend(color: colorCode, message: summary)
-} */
+} 
 
 
 
