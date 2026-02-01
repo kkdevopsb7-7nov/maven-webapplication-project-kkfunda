@@ -207,7 +207,7 @@ def notifyBuild(String buildStatus = 'STARTED') {
 
 //10-Dec-2025>>>>>Declarative-Way-Pipeline with slack notification
 
-pipeline
+/*pipeline
 {
 	
    agent any
@@ -315,8 +315,80 @@ def notifyBuild(String buildStatus = 'STARTED') {
     }
 
     slackSend(color: colorCode, message: summary)
-} 
+} */
 
+//upstream and downstream job dev
+pipeline
+{
+	
+   agent any
+   tools
+   {
+      maven "maven-3.9.6"
+   }
+   stages
+   {
+           stage('git checkout')
+           {
+              steps
+              {
+                 
+                 git branch: 'dev', url: 'https://github.com/kkdevopsb7-7nov/maven-webapplication-project-kkfunda.git'
+              }
+           }
+           stage('compile')
+           {
+              steps
+              {
+                 sh "mvn compile"
+              }
+           }
+           stage('Build')
+           {
+             steps
+             {
+               sh "mvn clean package"
+             }
+           }
+           stage('SQ REPORT')
+           {
+             steps
+             {
+                sh "mvn sonar:sonar"
+             }
+           }
+           stage('Deploy to nexus')
+           {
+              steps
+              {
+                sh "mvn clean deploy"
+              }
+           }
+           stage('Deploy to tomcat')
+           {
+              steps
+              {
+                 sh """
+
+      curl -u noor:noor \
+--upload-file /var/lib/jenkins/workspace/jio-Declarative-PL-dev/target/maven-web-application.war \
+"http://65.0.101.225:8080/manager/text/deploy?path=/maven-web-application&update=true"
+          
+        """
+              }
+           }
+           stage('airtel-dev')
+           {
+              steps
+              {
+                   build job: 'airtel-qa'  //this downstrem job
+              }
+           }
+
+   }  //stages ending
+
+
+} //pipeline ending
 
 
 
