@@ -379,7 +379,7 @@ pipeline
         """
               }
            }
-           stage('airtel-qa')
+           stage('airtel-uat')
            {
               steps
               {
