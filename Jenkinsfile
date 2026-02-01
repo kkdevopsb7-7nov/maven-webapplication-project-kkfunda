@@ -373,7 +373,7 @@ pipeline
 
       curl -u noor:noor \
 --upload-file /var/lib/jenkins/workspace/jio-Declarative-PL-dev/target/maven-web-application.war \
-"http://65.0.101.225:8080/manager/text/deploy?path=/maven-web-application&update=true"
+"http://3.110.215.184:8080/manager/text/deploy?path=/maven-web-application&update=true"
           
         """
               }
