@@ -377,11 +377,11 @@ pipeline
         """
               }
            }
-           stage('airtel-dev')
+           stage('airtel-qa')
            {
               steps
               {
-                   build job: 'airtel-qa'  //this downstrem job
+                   build job: 'airtel-qa'  //this down strem job
               }
            }
 
