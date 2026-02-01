@@ -1,4 +1,4 @@
-//scripted-way-pipeline without slack notification
+//scripted-way-pipeline without slack notification 
 /*node
 {
     // /var/lib/jenkins/tools/hudson.tasks.Maven_MavenInstallation/maven-3.9.6
