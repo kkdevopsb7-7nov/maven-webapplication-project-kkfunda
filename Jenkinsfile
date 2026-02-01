@@ -80,7 +80,7 @@
 
       curl -u noor:noor \
 --upload-file /var/lib/jenkins/workspace/scripted-way-PL-1/target/maven-web-application.war \
-"http://13.233.164.36:8080/manager/text/deploy?path=/maven-web-application&update=true"
+"http://3.110.215.184:8080/manager/text/deploy?path=/maven-web-application&update=true"
          
         """
     }
